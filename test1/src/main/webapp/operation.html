@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+            height: 100vh;
+        }
+        
+
+        .left-box {
+            width: 300px;
+            background-color: #4472C4;
+            padding: 20px;
+            color: white;
+        }
+
+        
+        .circle {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background-color: #C5E0B4;
+            margin-bottom: 70px;
+            /*margin-left: 8px;*/
+            margin-top: 10px;
+        }
+
+        .text {
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .buttons-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #4472C4
+        }
+
+        .left-button {
+            height: 70px;
+            font-size: 25px;
+            background-color: #F5B094
+        }
+
+        .center-box {
+            width: 900px;
+            background-color: white;
+            padding: 35vh;
+            color: black;
+            /*text-align: center;*/
+            /*margin-top: 50px;*/
+        }
+
+        .input-box {
+            width: 500px; /* 设置输入框的宽度为box的宽度 */
+            height: 60px; /* 设置输入框的高度 */
+            padding: 5px; /* 设置输入框的内边距 */
+            font-size: 30px; /* 设置输入框中文字体大小 */
+            background-color: white;
+        }
+
+        .input-sty{
+            width: 330px; /* 设置输入框的宽度为box的宽度 */
+            height: 30px; /* 设置输入框的高度 */
+            padding: 5px; /* 设置输入框的内边距 */
+            font-size: 30px; /* 设置输入框中文字体大小 */
+        }
+
+        .center-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .blue-button {
+            background-color: #4472C4;
+            height: 70px;
+            width: 150px;
+            color: white;
+            margin-top: 100px;
+            margin-right: 100px;
+            font-size: 25px;
+        }
+        
+        .center {
+            text-align: center;
+            font-size: 24px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .hidden {
+            display: none;
+        }
+
+        .author-input {
+            display: none;
+        }
+
+        .paper-input {
+            display: none;
+        }
+
+        .institution-input {
+            display: none;
+        }
+    </style>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        function showInputFields() {
+            var operationType = document.getElementById("operationType").value;
+            var dataType = document.getElementById("dataType").value;
+
+            var authorInput = document.getElementById("authorInput");
+            var paperInput = document.getElementById("paperInput");
+            var institutionInput = document.getElementById("institutionInput");
+
+            authorInput.style.display = "none";
+            paperInput.style.display = "none";
+            institutionInput.style.display = "none";
+
+            if (operationType === "增加" || operationType === "修改") {
+                if (dataType === "作者") {
+                    authorInput.style.display = "block";
+                } else if (dataType === "论文") {
+                    paperInput.style.display = "block";
+                } else if (dataType === "机构") {
+                    institutionInput.style.display = "block";
+                }
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <div class="left-box">
+        <div class="circle"></div>
+        <div class="text">早上好</div>
+        <div class="buttons-box">
+            <script>
+                function jumpIndex(){
+                    window.location.href="http://121.37.87.37:8080/test";
+                }
+                function jumpSearch(){
+                    window.location.href="./KnowledgeGraph.html";
+                }
+                function operateGraphDatabase(){
+                    window.location.href="./index.html";
+                }
+                function jumpSciInf(){
+                    window.location.href="./SciInf.html";
+                }
+            </script>
+            <button class="left-button" onclick="javascript:operateGraphDatabase()">操作图数据库</button>
+            <button class="left-button" onclick=javascript:jumpSearch()>查找知识图谱</button>
+            <button class="left-button" onclick=javascript:jumpIndex()>查看科研信息汇总表</button>
+            <button class="left-button" onclick="javascript:jumpSciInf()">检索科研信息</button>
+        </div>
+    </div>
+     <div class="center">
+     <form id="dataForm" action="/test1/Judge" method="post">
+        <label for="operation">操作：</label>
+        <select id="operation" name="operation">
+            <option value="">请选择</option>
+            <option value="delete">删除</option>
+            <option value="select">查找</option>
+            <option value="add">添加</option>
+        </select>
+
+        <label for="category">分类：</label>
+        <select id="category" name="category">
+            <option value="">请选择</option>
+            <option value="paper">论文</option>
+            <option value="author">作者</option>
+            <option value="institution">机构</option>
+        </select>
+
+        <!-- 根据选择的操作和分类显示对应的字段 -->
+        <div id="paperFields" style="display: none;">
+            <label for="title">标题：</label>
+            <input type="text" id="title" name="title"><br>
+        </div>
+
+        <div id="additionalFields" style="display: none;">
+            <label for="abstract">摘要：</label>
+            <input type="text" id="abstract" name="abstract"><br>
+
+            <label for="funds">基金：</label>
+            <input type="text" id="funds" name="funds"><br>
+
+            <label for="date">日期：</label>
+            <input type="text" id="date" name="date"><br>
+
+            <label for="domain">领域：</label>
+            <input type="text" id="domain" name="domain"><br>
+
+            <label for="source">来源：</label>
+            <input type="text" id="source" name="source"><br>
+        </div>
+
+        <div id="authorFields" style="display: none;">
+            <label for="authorName">作者姓名：</label>
+            <input type="text" id="authorName" name="authorName"><br>
+        </div>
+
+        <div id="institutionFields" style="display: none;">
+            <label for="institutionName">机构名称：</label>
+            <input type="text" id="institutionName" name="institutionName"><br>
+        </div>
+
+    <input type="submit" value="提交">
+  </form>
+  </div>
+  <script>
+    var operationSelect = document.getElementById("operation");
+    var categorySelect = document.getElementById("category");
+    var paperFields = document.getElementById("paperFields");
+    var additionalFields = document.getElementById("additionalFields");
+    var authorFields = document.getElementById("authorFields");
+    var institutionFields = document.getElementById("institutionFields");
+
+    operationSelect.addEventListener("change", function() {
+      resetFields();
+      var selectedOperation = operationSelect.value;
+      var selectedCategory = categorySelect.value;
+
+      if (selectedOperation === "delete" ) {
+        if (selectedCategory === "paper") {
+          paperFields.style.display = "block";
+          //dataForm.action = "DeletePaperServlet";
+        } else if (selectedCategory === "author") {
+          authorFields.style.display = "block";
+          //dataForm.action = "DeleteAuthorServlet";
+        } else if (selectedCategory === "institution") {
+          institutionFields.style.display = "block";
+          //dataForm.action = "DeleteInstitutionServlet";
+        }
+      } else if (selectedOperation === "add") {
+        if (selectedCategory === "paper") {
+          paperFields.style.display = "block";
+          additionalFields.style.display = "block";
+          //dataForm.action = "AddPaperServlet";
+        } else if (selectedCategory === "author") {
+          authorFields.style.display = "block";
+          //dataForm.action = "AddAuthorServlet";
+        } else if (selectedCategory === "institution") {
+          institutionFields.style.display = "block";
+          //dataForm.action = "AddInstitutionServlet";
+        }
+      } else if (selectedOperation === "select") {
+        if (selectedCategory === "paper") {
+          paperFields.style.display = "block";
+          //dataForm.action = "SelectPaperServlet";
+        } else if (selectedCategory === "author") {
+          authorFields.style.display = "block";
+          //dataForm.action = "SelectAuthorServlet";
+        } else if (selectedCategory === "institution") {
+          institutionFields.style.display = "block";
+          //dataForm.action = "SelectInstitutionServlet";
+        }
+      }
+
+
+    });
+
+    categorySelect.addEventListener("change", function() {
+      resetFields();
+      var selectedOperation = operationSelect.value;
+      var selectedCategory = categorySelect.value;
+      if (selectedOperation === "delete" ) {
+        if (selectedCategory === "paper") {
+          paperFields.style.display = "block";
+          //dataForm.action = "DeletePaperServlet";
+        } else if (selectedCategory === "author") {
+          authorFields.style.display = "block";
+          //dataForm.action = "DeleteAuthorServlet";
+        } else if (selectedCategory === "institution") {
+          institutionFields.style.display = "block";
+          //dataForm.action = "DeleteInstitutionServlet";
+        }
+      } else if (selectedOperation === "add") {
+        if (selectedCategory === "paper") {
+          paperFields.style.display = "block";
+          additionalFields.style.display = "block";
+          //dataForm.action = "AddPaperServlet";
+        } else if (selectedCategory === "author") {
+          authorFields.style.display = "block";
+          //dataForm.action = "AddAuthorServlet";
+        } else if (selectedCategory === "institution") {
+          institutionFields.style.display = "block";
+          //dataForm.action = "AddInstitutionServlet";
+        }
+      } else if (selectedOperation === "select") {
+        if (selectedCategory === "paper") {
+          paperFields.style.display = "block";
+          //dataForm.action = "SelectPaperServlet";
+        } else if (selectedCategory === "author") {
+          authorFields.style.display = "block";
+          //dataForm.action = "SelectAuthorServlet";
+        } else if (selectedCategory === "institution") {
+          institutionFields.style.display = "block";
+          //dataForm.action = "SelectInstitutionServlet";
+        }
+      } 
+    });
+
+    function resetFields() {
+      paperFields.style.display = "none";
+      additionalFields.style.display = "none";
+      authorFields.style.display = "none";
+      institutionFields.style.display = "none";
+    }
+  </script>
+</div>
+</body>
+</html>
+<script src="./js/getname.js"></script>

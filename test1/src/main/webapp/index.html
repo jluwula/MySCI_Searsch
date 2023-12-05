@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>科研数据可视化</title>
+
+    <style>
+        .container{
+            width: 1200px;
+            height: 2600px;
+            background-color: #fffef2;
+            display: flex;
+			flex-direction: column;
+			margin-left: auto;
+			margin-right: auto;
+			align-items: center;
+        }
+
+        .header{
+            display: flex;
+            justify-content: space-between;
+			align-items: center;
+			height: 75px;
+			width: 100%;
+        }
+
+        .header-l {
+			font-size: 20px;
+			margin-left: 59px;
+		}
+
+		.header-m {
+			font-size: 40px;
+			margin-right: 59px;
+		}
+
+		.header-r {
+			font-size: 20px;
+			margin-right: 59px;
+		}
+
+		.box1{
+		    height: 450px;
+		    width: 100%;
+		    display: flex;
+		}
+
+        .box1-l{
+            height: 100%;
+            width: 50%;
+
+        }
+
+        .box1-r{
+            height: 100%;
+            width: 50%;
+        }
+
+        .box2{
+		    height: 400px;
+		    width: 100%;
+		    display: flex;
+		}
+
+        .box2-l{
+            height: 100%;
+            width: 50%;
+
+        }
+
+        .box2-r{
+            height: 100%;
+            width: 50%;
+        }
+
+        .box3{
+            height: 600px;
+            width: 100%;
+            display: flex;
+        }
+        .box4{
+            height: 600px;
+            width: 100%;
+            display: flex;
+        }
+        .box5{
+            height: 600px;
+            width: 100%;
+            display: flex;
+        }
+        .box6{
+            height: 600px;
+            width: 100%;
+            display: flex;
+        }
+    </style>
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/echarts-wordcloud.min.js"></script>
+    <script src="./js/walden.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+        <div class="header">
+            <div class="header-l"><p><span id="current-time"></span></p></div>
+            <div class="header-m">科研数据可视化大屏</div>
+            <div class="header-r">23°     西南风     空气佳</div>
+        </div>
+        <div class="box1">
+            <div class="box1-l" style="border: 1px solid black;">
+                <div id="keyword" style="width: 100%; height: 100%;"></div>
+            </div>
+            <div class="box1-r" style="border: 1px solid black;">
+                <div id="PaperByAuthor" style="width: 100%; height: 100%;"></div>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box2-l" style="border: 1px solid black;">
+                <div id="PaperByAuthorPie" style="width: 100%; height: 100%;"></div>
+            </div>
+            <div class="box2-r" style="border: 1px solid black;">
+                <div id="Journal" style="width: 100%; height: 100%;"></div>
+            </div>
+        </div>
+        <div class="box3" style="border: 1px solid black;">
+            <div id="AuthorLink" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="box4" style="border: 1px solid black;">
+            <div id="insLink" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="box5" style="border: 1px solid black;">
+            <div id="PaperByYear" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="box6" style="border: 1px solid black;">
+            <div id="rador" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+     var currentDate = new Date();
+
+     var year = currentDate.getFullYear();
+     var month = currentDate.getMonth() + 1; // 月份从0开始，所以需要加1
+     var day = currentDate.getDate();
+     var dayOfWeek = currentDate.getDay(); // 返回0-6，0表示星期日
+
+     var daysOfWeek = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+
+     var formattedDate = year + "年" + month + "月" + day + "日 ";
+     var formattedDayOfWeek = daysOfWeek[dayOfWeek];
+     document.getElementById("current-time").innerHTML = formattedDate + formattedDayOfWeek;
+</script>
+<script src="./js/data/keyword.js"></script>
+<script src="./js/data/paperByAuthor.js"></script>
+<script src="./js/data/journal.js"></script>
+<script src="./js/data/authorLink.js"></script>
+<script src="./js/data/insLink.js"></script>
+<script src="./js/data/paperByYear.js"></script>
+<script src="./js/data/rador.js"></script>

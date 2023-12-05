@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>loginpage</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            /* background-color: rgba(206, 194, 182, 0.684); */
+            background-image: linear-gradient(to left, rgba(206, 194, 182, 0.684), #b4d9cb);
+        }
+
+
+        /*------------------------------------------------------------------------------以下为轮播图部分css--------------------------------------*/
+        .box1 {
+            position: relative;
+            width: 650px;
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 150px;
+            margin-left: 100px;
+
+        }
+
+        .box2 {
+            width: 400px;
+            height: 500px;
+            transition: .4s;
+            background-size: cover;
+        }
+
+        .box3 {
+            /*垂直布局*/
+            width: 200px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pics {
+            position: relative;
+            width: 200px;
+            height: 90px;
+            right: 0;
+            transition: .5s;
+            overflow: hidden;
+        }
+
+        .pics img {
+            position: absolute;
+            width: 200px;
+            transform: translate(0, -50px);
+            transition: .5s;
+            right: 0;
+        }
+
+        .pics.pics2 {
+            opacity: 0;
+            right: 250px;
+        }
+
+        .pics:hover img {
+            opacity: 0;
+            right: 250px;
+        }
+
+        /*----------------------------------------------以下为登录界面部分css-------------------------------------------*/
+        .container {
+            background-color: rgb(249, 246, 238);
+            width: 650px;
+            height: 415px;
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 999;
+            margin-top: 190px;
+            margin-left: 60px;
+
+        }
+
+        .formbox {
+            position: absolute;
+            top: -10%;
+            left: 5%;
+            background-color: rgb(206, 194, 182);
+            width: 320px;
+            height: 500px;
+            border-radius: 5px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            transition: 0.5s ease-in-out;
+        }
+
+        .registerbox,
+        .loginbox {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hidden {
+            display: none;
+            transition: 0.5s;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            color: white;
+            letter-spacing: 5px;
+        }
+
+        input {
+            background-color: transparent;
+            width: 70%;
+            color: white;
+            border: none;
+            border-bottom: 1px solid white;
+            padding: 10px 0;
+            text-indent: 10px;
+            margin: 8px 0;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        input::placeholder {
+            color: white;
+        }
+
+        input:focus {
+            color: rgb(129, 108, 62);
+            outline: none;
+            border-bottom: 1px solid rgb(172, 155, 116);
+            transition: 0.5s;
+        }
+
+        input:focus::placeholder {
+            opacity: 0;
+        }
+
+        .formbox button {
+            width: 70%;
+            margin-top: 35px;
+            background-color: white;
+            outline: none;
+            border-radius: 8px;
+            padding: 13px;
+            color: rgb(166, 164, 157);
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+
+        }
+
+        .formbox button:hover {
+            background-color: rgb(172, 155, 116);
+            color: white;
+            transition: background-color 0.5s ease;
+        }
+
+        .con-box {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .con-box.left {
+            left: -2%;
+        }
+
+        .con-box.right {
+            right: -2%;
+        }
+
+        .con-box h2 {
+            color: rgb(172, 155, 116);
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 4px;
+
+        }
+
+        .con-box p {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: grey;
+            text-align: center;
+        }
+
+        .con-box span {
+            color: rgb(72, 70, 70);
+        }
+
+        .con-box img {
+            width: 150px;
+            height: 150px;
+            opacity: 0.9;
+            margin: 40px 0;
+
+        }
+
+        .con-box button {
+            margin-top: 3%;
+            background-color: white;
+            color: rgb(166, 164, 157);
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 6px 10px;
+            letter-spacing: 1px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .con-box button:hover {
+            background-color: rgb(172, 155, 116);
+            color: white;
+        }
+
+        .fBox {
+            display: flex;
+        }
+
+        /*------------------------------------------------头部文字--------------------------------------------------------*/
+        .pbox {
+            margin-top: 40px;
+            margin-bottom: -55px;
+            width: 100%;
+            height: 20px;
+            font-size: 60px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-weight: bold;
+            text-align: center;
+
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+</head>
+
+<body>
+    <!-- 头部文字 -->
+    <div class="pbox"><cite>"The future is here."</cite></div>
+    <div class="fBox">
+        <!-- 左侧轮播图 -->
+        <div class="box1">
+            <div class="box2"></div>
+            <div class="box3">
+                <div class="pics pics2"><img src="./img_src/1.jpg" alt=""></div>
+                <div class="pics"><img src="./img_src/2.jpg" alt=""></div>
+                <div class="pics"><img src="./img_src/3.jpg" alt=""></div>
+                <div class="pics"><img src="./img_src/4.jpg" alt=""></div>
+                <div class="pics"><img src="./img_src/5.jpg" alt=""></div>
+            </div>
+
+        </div>
+        <!-- 写完项目要把登陆注册的url改一下 -->
+        <!-- 右侧登录界面 -->
+        <div class="container">
+            <div class="formbox">
+                <form class="registerbox hidden" action="/test1/register" method="get">
+                    <h1>register</h1>
+                    <input type="text" name="username" placeholder="用户名">
+                    <input type="password" name="password" placeholder="密码">
+                    <input type="password" placeholder="确认密码">
+                    <button type="submit">注册</button>
+                </form>
+                <form class="loginbox" action="/test1/login" method="get">
+                    <h1>login</h1>
+                    <input type="text" name="userId" placeholder="用户ID">
+                    <input type="password" name="password" placeholder="密码">
+                    <button type="submit">登录</button>
+                </form>
+            </div>
+            <div class="con-box left">
+                <h2>We are <span>IScience</span></h2>
+                <p>Stay <span>foolish.</span></p>
+                <div>
+                    <img src="./img_src/6.jpg" alt="">
+                </div>
+                <p>已有账号？</p>
+                <button id="login">去登录</button>
+            </div>
+            <div class="con-box right">
+                <h2>We are <span>IScience</span></h2>
+                <p>Stay <span>hungry.</span></p>
+                <div>
+                    <img src="./img_src/7.jpg" alt="">
+                </div>
+                <p>没有账号？</p>
+                <button id="register">去注册</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        //-----------------------以下为左侧轮播图部分
+        //获取左边大图元素
+        let picbox2 = document.querySelector(".box2")
+        //获取右边小图元素
+        let picbox3 = document.getElementsByClassName("pics")
+        let time
+        let index = 0
+        //重置函数
+        function reset() {
+            for (let i = 0; i < picbox3.length; i++) {
+                picbox3[i].className = "pics"
+
+            }
+        }
+        //选中函数
+        function getpic() {
+            reset()
+            picbox3[index].className = "pics pics2"
+        }
+        //设置启动的时间函数
+        function start() {
+            time = setInterval(function () {
+                getpic()
+                index++
+                picbox2.style.backgroundImage = "url('./img_src/" + [index] + ".jpg')"
+                if (index == 5) {
+                    index = 0
+                }
+            }, 1500);
+        }
+        for (let i = 0; i < picbox3.length; i++) {
+            picbox3[i].onmousemove = function () {
+                //鼠标移动到小图片时右边大图自动变成当前的小图片
+                picbox2.style.backgroundImage = "url('./img_src/" + [i + 1] + ".jpg')"
+                //关闭定时器重置定时
+                //移开后再继续执行
+                reset()
+                clearInterval(time)
+                index = i + 1
+                if (index == 5) {
+                    index--
+                }
+                start()
+            }
+        }
+        start()
+
+        //----------以下为右侧登录注册部分
+        //需要的元素
+        let login = document.getElementById("login")
+        let register = document.getElementById("register")
+        let form_box = document.getElementsByClassName("formbox")[0]
+        let register_box = document.getElementsByClassName("registerbox")[0]
+        let login_box = document.getElementsByClassName("loginbox")[0]
+        //单机事件：改变类名转移hidden属性的位置，盒子同时移动
+        register.addEventListener("click", function () {
+            form_box.style.transform = "translateX(80%)"
+            login_box.classList.add("hidden")
+            register_box.classList.remove("hidden")
+        })
+
+        login.addEventListener("click", function () {
+            form_box.style.transform = "translateX(0%)"
+            register_box.classList.add("hidden")
+            login_box.classList.remove("hidden")
+
+        })
+    </script>
+
+
+</body>
+
+</html>
